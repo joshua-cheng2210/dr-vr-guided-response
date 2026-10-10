@@ -1,0 +1,627 @@
+/* Dark, high-contrast "headset view". Always dark: it stands in for an AR display. */
+:root {
+  --bg: #05090d;
+  --panel: #0c141b;
+  --panel-2: #111c25;
+  --line: #1f2e39;
+  --text: #e9f2f6;
+  --text-2: #c9d8df;
+  --muted: #8ea4b0;
+  --accent: #3fd0ff;
+  --alert: #ff5257;
+  --success: #3ddc84;
+  --warn: #ffb224;
+  --radius: 18px;
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px 16px;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+
+.banner {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warn);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 12px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.protocol-name {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+button.pill {
+  cursor: pointer;
+}
+
+.pill-demo {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.voice-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.pill-voice.on {
+  border-color: var(--alert);
+}
+
+.pill-voice.on .voice-dot {
+  background: var(--alert);
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+/* ── Step card ──────────────────────────────────────── */
+
+.stage {
+  flex: 1;
+  display: flex;
+}
+
+.step {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 36px;
+  padding: 36px;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  animation: enter 0.25s ease-out;
+}
+
+.tone-alert .step {
+  border-color: var(--alert);
+  animation:
+    enter 0.25s ease-out,
+    alert-pulse 1.2s ease-in-out infinite;
+}
+
+.tone-success .step {
+  border-color: var(--success);
+}
+
+.visual {
+  display: flex;
+  justify-content: center;
+  color: var(--text);
+}
+
+.tone-alert .visual {
+  color: var(--alert);
+}
+
+.tone-success .visual {
+  color: var(--success);
+}
+
+.illustration {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+
+.accent {
+  stroke: var(--accent);
+}
+
+.accent-fill {
+  fill: var(--accent);
+}
+
+.phase {
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tone-alert .phase {
+  color: var(--alert);
+}
+
+.tone-success .phase {
+  color: var(--success);
+}
+
+.title {
+  margin: 0 0 16px;
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.1;
+}
+
+.text {
+  margin: 0;
+  color: var(--text-2);
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.45;
+}
+
+/* ── Kit diagram ────────────────────────────────────── */
+
+.kit {
+  width: 100%;
+  max-width: 440px;
+  margin: 0;
+}
+
+.kit svg {
+  width: 100%;
+  height: auto;
+}
+
+.kit-case {
+  fill: #18222b;
+  stroke: #3b4a55;
+  stroke-width: 3;
+}
+
+.kit-handle {
+  fill: none;
+  stroke: #3b4a55;
+  stroke-width: 5;
+}
+
+.bay-number {
+  fill: #fff;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.bay-name {
+  fill: #fff;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.bay-dim {
+  opacity: 0.25;
+}
+
+.bay-active .bay-rect {
+  stroke: #fff;
+  stroke-width: 4;
+  animation: bay-pulse 1s ease-in-out infinite;
+}
+
+.bay-slot {
+  fill: #fff;
+  animation: blink 1s ease-in-out infinite;
+}
+
+.kit figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+}
+
+/* ── Timers ─────────────────────────────────────────── */
+
+.countdown {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-top: 28px;
+}
+
+.countdown svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ring-track {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 8;
+}
+
+.ring {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.25s linear;
+}
+
+.countdown-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-time {
+  font-size: 46px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-caption {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.silence {
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.silence-track {
+  height: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background: var(--line);
+  border-radius: 4px;
+}
+
+.silence-fill {
+  height: 100%;
+  background: var(--warn);
+  transition: width 0.25s linear;
+}
+
+/* ── End screen + handoff log ───────────────────────── */
+
+.step-end {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+}
+
+.end-summary {
+  color: var(--text);
+}
+
+.tone-alert .end-summary {
+  color: var(--alert);
+}
+
+.tone-success .end-summary {
+  color: var(--success);
+}
+
+.end-summary .illustration {
+  max-width: 200px;
+  margin-bottom: 12px;
+}
+
+/* The tone color is for the drawing only; keep the words white. */
+.end-summary .title {
+  color: var(--text);
+}
+
+.handoff {
+  padding: 16px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.handoff h2 {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.handoff table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.handoff td {
+  padding: 4px 10px 4px 0;
+  vertical-align: top;
+}
+
+.handoff-time,
+.handoff-elapsed {
+  color: var(--muted);
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  white-space: nowrap;
+}
+
+.handoff-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ── Voice + controls ───────────────────────────────── */
+
+.heard {
+  min-height: 36px;
+  padding: 10px 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.heard-outcome {
+  color: var(--text-2);
+}
+
+.heard-error {
+  color: var(--warn);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn {
+  min-height: 56px;
+  padding: 0 22px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.btn:focus-visible,
+.pill:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-big {
+  min-width: 160px;
+  min-height: 72px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #002433;
+}
+
+.tone-alert .btn-primary {
+  background: var(--alert);
+  border-color: var(--alert);
+  color: #fff;
+}
+
+/* Yes and No share one neutral style; a protocol's `recommended` answer gets .btn-primary instead. */
+.btn-answer {
+  background: #2a3640;
+  border-color: #3b4a55;
+}
+
+.sources {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ── Idle screen ────────────────────────────────────── */
+
+.idle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.idle-mark {
+  width: 96px;
+  height: 96px;
+  background: var(--alert);
+  border-radius: 24px;
+  color: #fff;
+  font-size: 76px;
+  font-weight: 800;
+  line-height: 92px;
+}
+
+.idle h1 {
+  margin: 8px 0 0;
+  font-size: 44px;
+}
+
+.idle p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.btn-huge {
+  min-width: 240px;
+  min-height: 84px;
+  margin: 16px 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.idle .idle-hint {
+  max-width: 540px;
+  font-size: 14px;
+}
+
+/* ── Motion ─────────────────────────────────────────── */
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes alert-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(255 82 87 / 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgb(255 82 87 / 0.35);
+  }
+}
+
+@keyframes bay-pulse {
+  0%,
+  100% {
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-opacity: 0.15;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Phone width ────────────────────────────────────── */
+
+@media (max-width: 760px) {
+  .step,
+  .step-end {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .illustration {
+    max-width: 220px;
+  }
+
+  .kit {
+    max-width: 320px;
+  }
+
+  .countdown {
+    width: 160px;
+    height: 160px;
+    margin: 20px auto 0;
+  }
+
+  .controls .btn {
+    flex: 1 1 auto;
+  }
+
+  .btn-big {
+    min-width: 0;
+  }
+}

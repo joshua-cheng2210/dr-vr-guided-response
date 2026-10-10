@@ -1,0 +1,19 @@
+- generic [ref=e3]:
+  - generic [ref=e4]: Prototype, not a medical device · For training and demonstration only
+  - banner [ref=e5]:
+    - generic [ref=e6]: Dr.-VR
+    - generic [ref=e8]: Opioid overdose · Naloxone
+    - generic [ref=e9]:
+      - generic [ref=e10]: Demo speed
+      - generic [ref=e11]: Doses 0/2
+      - button "Voice off" [ref=e12] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - generic [aria-hidden] [ref=e16]: +
+      - heading "Dr.-VR ready" [level=1] [ref=e17]
+      - paragraph [ref=e18]: Step-by-step help for a suspected opioid overdose.
+      - button "Start" [active] [ref=e19] [cursor=pointer]
+      - paragraph [ref=e20]: Voice turns on when you start. Say “yes”, “no”, “next”, “back”, “repeat” or “dose given”.
+      - paragraph [ref=e21]: "Keyboard: Y / N · → next · ← back · D dose given · R repeat"
+  - contentinfo
+  - paragraph [ref=e23]: "Step wording from: NARCAN® Nasal Spray Quick Start Guide · SAMHSA Opioid Overdose Prevention Toolkit"

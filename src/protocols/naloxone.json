@@ -1,0 +1,220 @@
+{
+  "id": "naloxone",
+  "title": "Opioid overdose · Naloxone",
+  "maxDoses": 2,
+  "sources": [
+    "NARCAN® Nasal Spray Quick Start Guide",
+    "SAMHSA Opioid Overdose Prevention Toolkit"
+  ],
+  "steps": [
+    {
+      "id": "q-responds",
+      "kind": "question",
+      "phase": "Triage",
+      "title": "Check for a response",
+      "text": "Shout their name, shake their shoulders, and firmly rub the middle of their chest. Do they respond?",
+      "illustration": "shout",
+      "log": "Responds to voice or touch",
+      "onYes": "end-responsive"
+    },
+    {
+      "id": "q-breathing",
+      "kind": "question",
+      "phase": "Triage",
+      "title": "Check their breathing",
+      "text": "Watch their chest for up to 10 seconds. Is their breathing very slow, gasping, or stopped?",
+      "speak": "Watch their chest for up to ten seconds. Is their breathing very slow, gasping, or stopped?",
+      "illustration": "breathing",
+      "log": "Breathing slow, gasping or stopped",
+      "onNo": "end-breathing"
+    },
+    {
+      "id": "q-pupils",
+      "kind": "question",
+      "phase": "Triage",
+      "title": "Look at their eyes",
+      "text": "Are the pupils very small, like pinpoints?",
+      "illustration": "pupils",
+      "log": "Pinpoint pupils"
+    },
+    {
+      "id": "q-lips",
+      "kind": "question",
+      "phase": "Triage",
+      "title": "Look at their lips",
+      "text": "Are their lips or fingertips blue or gray?",
+      "illustration": "lips",
+      "log": "Blue or gray lips or fingertips"
+    },
+    {
+      "id": "result",
+      "kind": "question",
+      "phase": "Triage",
+      "title": "An overdose is possible",
+      "text": "Naloxone won't harm someone who hasn't taken opioids. Use the naloxone in your kit?",
+      "speak": "An overdose is possible. Naloxone won't harm someone who hasn't taken opioids. Use the naloxone in your kit?",
+      "illustration": "naloxone",
+      "log": "Use naloxone",
+      "onNo": "end-no-naloxone",
+      "recommended": "yes",
+      "variants": [
+        {
+          "when": { "anyYes": ["q-pupils", "q-lips"] },
+          "title": "This looks like a possible opioid overdose",
+          "text": "Use the naloxone in your kit?",
+          "speak": "This looks like a possible opioid overdose. Use the naloxone in your kit?"
+        }
+      ]
+    },
+    {
+      "id": "call-911",
+      "kind": "info",
+      "phase": "Give naloxone",
+      "title": "Call 911 now",
+      "text": "Put your phone on speaker and keep going. If they stop breathing, the dispatcher will coach you through CPR.",
+      "speak": "Call nine one one now. Put your phone on speaker and keep going. If they stop breathing, the dispatcher will coach you through C P R.",
+      "illustration": "phone"
+    },
+    {
+      "id": "get-kit",
+      "kind": "info",
+      "phase": "Give naloxone",
+      "title": "Open Bay 1",
+      "text": "Open the red Bay 1 and take out the Narcan nasal spray.",
+      "speak": "Open the red bay, number one, and take out the Narcan nasal spray.",
+      "bay": 1
+    },
+    {
+      "id": "lay-back",
+      "kind": "info",
+      "phase": "Give naloxone",
+      "title": "Lay them on their back",
+      "text": "Lay them flat on their back, face up.",
+      "speak": "Lay them flat, face up.",
+      "illustration": "lay-back"
+    },
+    {
+      "id": "prepare",
+      "kind": "info",
+      "phase": "Give naloxone",
+      "title": "Get the spray ready",
+      "text": "Peel open the package and take out the spray. Hold it with your thumb on the plunger and two fingers on either side of the nozzle.",
+      "illustration": "hold-spray",
+      "variants": [
+        {
+          "when": { "dosesAtLeast": 1 },
+          "title": "Get a new spray ready",
+          "text": "Take the second spray from the pack and peel it open. Thumb on the plunger, two fingers on either side of the nozzle."
+        }
+      ]
+    },
+    {
+      "id": "insert",
+      "kind": "info",
+      "phase": "Give naloxone",
+      "title": "Insert the nozzle",
+      "text": "Tilt their head back and support their neck with your hand. Gently insert the nozzle into one nostril until your fingers touch the bottom of their nose.",
+      "speak": "Support their neck with your hand and tilt the head so the chin points up. Gently put the nozzle into one nostril until your fingers touch the bottom of their nose.",
+      "illustration": "insert",
+      "variants": [
+        {
+          "when": { "dosesAtLeast": 1 },
+          "title": "Use the other nostril",
+          "text": "Tilt their head back and support their neck with your hand. Insert the new nozzle into the other nostril until your fingers touch the bottom of their nose.",
+          "speak": "Support their neck and tilt the head so the chin points up. Put the new nozzle into the other nostril until your fingers touch the bottom of their nose."
+        }
+      ]
+    },
+    {
+      "id": "spray",
+      "kind": "dose",
+      "phase": "Give naloxone",
+      "title": "Press the plunger",
+      "text": "Press the plunger firmly to give the dose. Then say “dose given” or tap the button.",
+      "speak": "Press the plunger firmly to give the dose, then let me know.",
+      "illustration": "press"
+    },
+    {
+      "id": "recovery",
+      "kind": "wait",
+      "phase": "Monitor",
+      "title": "Roll them onto their side",
+      "text": "Put them in the recovery position. Stay with them and watch their breathing.",
+      "speak": "Roll them onto their side and watch their breathing. Stay with them. I'll check in with you in a couple of minutes.",
+      "illustration": "recovery",
+      "seconds": 150,
+      "demoSeconds": 15
+    },
+    {
+      "id": "checkin",
+      "kind": "checkin",
+      "phase": "Monitor",
+      "title": "Check on them",
+      "text": "Are they waking up or breathing normally?",
+      "illustration": "breathing",
+      "log": "Check-in",
+      "silenceSeconds": 15,
+      "demoSilenceSeconds": 10,
+      "onYes": "end-recovering",
+      "onNo": "second-dose",
+      "onNoDosesLeft": "end-no-doses"
+    },
+    {
+      "id": "second-dose",
+      "kind": "info",
+      "phase": "Give naloxone",
+      "tone": "alert",
+      "title": "Give a second dose",
+      "text": "They're not responding. Give a second dose with a new spray, in the other nostril.",
+      "illustration": "second-dose",
+      "next": "prepare"
+    },
+    {
+      "id": "end-recovering",
+      "kind": "end",
+      "phase": "Done",
+      "tone": "success",
+      "title": "They're responding",
+      "text": "Keep them on their side and stay with them until EMS arrives. Naloxone can wear off, so keep watching their breathing.",
+      "illustration": "recovery"
+    },
+    {
+      "id": "end-no-doses",
+      "kind": "end",
+      "phase": "Done",
+      "tone": "alert",
+      "title": "No doses left",
+      "text": "Keep them on their side and follow the 911 dispatcher's instructions until EMS arrives.",
+      "speak": "That was the last dose in the kit. Keep them on their side and follow the dispatcher until the ambulance arrives.",
+      "illustration": "phone"
+    },
+    {
+      "id": "end-responsive",
+      "kind": "end",
+      "phase": "Done",
+      "tone": "success",
+      "title": "They're responding",
+      "text": "Stay with them. Call 911 if they get worse or become hard to wake.",
+      "speak": "Stay with them. Call nine one one if they get worse or become hard to wake.",
+      "illustration": "ok"
+    },
+    {
+      "id": "end-breathing",
+      "kind": "end",
+      "phase": "Done",
+      "title": "They're breathing",
+      "text": "Put them on their side, call 911, and keep watching their breathing.",
+      "speak": "Put them on their side, call nine one one, and keep watching their breathing.",
+      "illustration": "recovery"
+    },
+    {
+      "id": "end-no-naloxone",
+      "kind": "end",
+      "phase": "Done",
+      "title": "Call 911",
+      "text": "Call 911 and follow the dispatcher's instructions until EMS arrives.",
+      "speak": "Call nine one one and follow the dispatcher until the ambulance arrives.",
+      "illustration": "phone"
+    }
+  ]
+}
