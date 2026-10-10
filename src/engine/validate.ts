@@ -22,6 +22,12 @@ export function validateProtocol(protocol: Protocol): Protocol {
     }
   };
 
+  const checkAnswer = (from: string, value: string | undefined, label: string) => {
+    if (value !== undefined && value !== 'yes' && value !== 'no') {
+      errors.push(`Step "${from}" ${label} must be "yes" or "no", not "${value}"`);
+    }
+  };
+
   protocol.steps.forEach((step: Step, i) => {
     const hasFollowing = i + 1 < protocol.steps.length;
     switch (step.kind) {
@@ -37,9 +43,7 @@ export function validateProtocol(protocol: Protocol): Protocol {
         if ((step.onYes === undefined || step.onNo === undefined) && !hasFollowing) {
           errors.push(`Step "${step.id}" has nowhere to go on one of its answers`);
         }
-        if (step.recommended !== undefined && step.recommended !== 'yes' && step.recommended !== 'no') {
-          errors.push(`Step "${step.id}" recommended must be "yes" or "no", not "${step.recommended}"`);
-        }
+        checkAnswer(step.id, step.recommended, 'recommended');
         break;
       case 'checkin':
         check(step.id, step.onYes, 'onYes');
