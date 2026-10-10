@@ -155,6 +155,8 @@ npm run dev        # starts the app
 
 Then open **http://localhost:5173/?demo=1** in Chrome. Without `?demo=1` the app uses the real 2:30 timing.
 
+**Online:** https://joshua-cheng2210.github.io/dr-vr-guided-response/?demo=1. Every push to `main` runs the tests, then rebuilds and redeploys the site (`.github/workflows/deploy.yml`).
+
 | Command | What it does |
 |---|---|
 | `npm test` | Runs the 42 automated checks on the engine and the voice commands |
